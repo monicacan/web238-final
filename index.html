@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rex Orange County</title>
+
+    <!--jQuery-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css">
+
+    <!--Styles-->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sticky Header -->
+    <div class="sticky-header">
+        <nav>
+            <a href="#" id="music-link" class="nav">
+                Music
+                <span class="nav-underline"></span>
+            </a>
+            <a href="#" id="videos-link" class="nav">Videos<span class="nav-underline"></span></a>
+            <a href="#" id="home-link" class="nav">Rex Orange County</a>
+            <a href="#" id="tour-link" class="nav">Tour<span class="nav-underline"></span></a>
+            <a href="#" id="store-link" class="nav">Store<span class="nav-underline"></span></a>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    <div id="cookies-modal" class="modal">
+        <p class="body">Do you allow cookies on this website?</p>
+        <br>
+        <button id="accept-cookies" class="button-primary">Accept</button>
+        <button id="deny-cookies" class="button-secondary">Deny</button>
+    </div>
+
+    <div id="music-modal" class="modal">
+        <h1>Music</h1>
+        <div class="navigation-arrows">
+            <button id="prev-music" disabled>←</button>
+            <div class="gallery-container body" id="music-gallery">
+                <!-- Music items will be dynamically populated -->
+            </div>
+            <button id="next-music">→</button>
+        </div>
+    </div>
+
+    <div id="tour-modal" class="modal">
+        <table class="body">
+            <tr>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Tickets</th>
+            </tr>
+            <tr>
+                <td>July 15, 2024</td>
+                <td>Los Angeles, CA</td>
+                <td><a href="#">Tickets</a></td>
+            </tr>
+            <tr>
+                <td>August 22, 2024</td>
+                <td>New York, NY</td>
+                <td><a href="#">Tickets</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="videos-modal" class="modal">
+        <div class="video-gallery">
+            <div class="video-navigation">
+                <button id="prev-video" class="nav-btn">←</button>
+                <div class="video-container">
+                    <img id="current-video-image" src="" alt="Video">
+                    <div class="video-title" id="current-video-title"></div>
+                </div>
+                <button id="next-video" class="nav-btn">→</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="store-modal" class="modal">
+        <div class="tabs">
+            <div class="tab active" data-tab="apparel">Apparel</div>
+            <div class="tab" data-tab="cds">CDs</div>
+        </div>
+        <div id="apparel" class="tab-content active">
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="/assets/t-shirt.png" alt="Tour T-Shirt">
+                    <div class="product-title">Posture T-Shirt</div>
+                    <div class="product-price">$30.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/assets/hoodie.png" alt="Hoodie">
+                    <div class="product-title">Who Cares? Hoodie</div>
+                    <div class="product-price">$55.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/assets/hat.png" >
+                    <div class="product-title">Shield Cap</div>
+                    <div class="product-price">$25.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div id="cds" class="tab-content">
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="/api/placeholder/200/200" alt="WHO CARES? Album">
+                    <div class="product-title">WHO CARES? CD</div>
+                    <div class="product-price">$15.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/200/200" alt="Pony Album">
+                    <div class="product-title">Pony CD</div>
+                    <div class="product-price">$15.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/200/200" alt="Apricot Princess Album">
+                    <div class="product-title">Apricot Princess CD</div>
+                    <div class="product-price">$15.00</div>
+                    <button class="buy-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="#" id="about-link" class="nav">About</a>
+
+        <!-- About Modal -->
+        <div id="about-modal" class="modal">
+            <h2>About Rex Orange County</h2>
+            <br><br>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Who is Rex Orange County?
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        Rex Orange County, born Alexander O'Connor, is an English singer, songwriter, and musician known for his indie pop style. He gained popularity through his unique blend of bedroom pop, jazz, and alternative music.
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        How did Rex Orange County start his music career?
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        He began uploading music to SoundCloud while in school and gained significant attention after collaborating with Tyler, the Creator on the album "Flower Boy". His breakthrough came with albums like "Apricot Princess" and "Pony".
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        What are some of Rex Orange County's most popular songs?
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        Some of his most popular tracks include "Loving Is Easy", "Best Friend", "Sunflower", and "Pluto". His music often explores themes of love, self-discovery, and personal growth.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="button-tertiary">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Cookie Consent Modal
+            $('#cookies-modal').modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false
+            });
+            $('#cookies-modal').modal('open');
+
+            $('#accept-cookies, #deny-cookies').click(function() {
+                $.modal.close();
+            });
+
+            // Navigation Modal Triggers
+            $('#music-link').click(function(e) {
+                e.preventDefault();
+                $('#music-modal').modal('open');
+            });
+
+            $('#tour-link').click(function(e) {
+                e.preventDefault();
+                $('#tour-modal').modal('open');
+            });
+
+            $('#store-link').click(function(e) {
+                e.preventDefault();
+                $('#store-modal').modal('open');
+            });
+
+            // Store Tab Functionality
+            $('.tab').click(function() {
+                $('.tab').removeClass('active');
+                $('.tab-content').removeClass('active');
+                $(this).addClass('active');
+                $(`#${$(this).data('tab')}`).addClass('active');
+            });
+
+            // Music Gallery
+            const musicData = [
+                { title: 'Sunflowers', image: 'assets/sunflower.jpg' },
+                { title: 'Loving Is Easy', image: 'assets/loving-is-easy.jpg' },
+                { title: 'Best Friend', image: 'assets/best-friend.jpg' },
+                { title: 'Amazing', image: 'assets/amazing.jpg' },
+                { title: 'Pluto Projector', image: 'assets/pluto.jpg' },
+                { title: 'Corduroy Dreams', image: 'assets/corduroy-dreams.jpg' },
+            ];
+
+            let currentMusicPage = 0;
+
+            function populateMusicGallery() {
+                const startIndex = currentMusicPage * 3;
+                const endIndex = startIndex + 3;
+                
+                $('#music-gallery').html(musicData.map((song, index) => 
+                    `<div class="gallery-item ${
+                        index >= startIndex && index < endIndex ? '' : 'hidden'
+                    }" data-index="${index}">
+                        <img src="${song.image}" alt="${song.title}">
+                        <p>${song.title}</p>
+                    </div>`
+                ).join(''));
+
+                // Update navigation buttons based on available pages
+                $('#prev-music').prop('disabled', currentMusicPage === 0);
+                $('#next-music').prop('disabled', (currentMusicPage * 3 + 3) >= musicData.length);
+            }
+
+            $('#next-music').click(function() {
+                if ((currentMusicPage * 3 + 3) < musicData.length) {
+                    currentMusicPage++;
+                    populateMusicGallery();
+                }
+            });
+
+            $('#prev-music').click(function() {
+                if (currentMusicPage > 0) {
+                    currentMusicPage--;
+                    populateMusicGallery();
+                }
+            });
+            
+
+            // Initial population of gallery
+            populateMusicGallery();
+
+            // Videos Gallery Implementation
+            const videosData = [
+                { 
+                    title: 'Sunflowers', 
+                    image: 'assets/sunflower-vid.png',
+                    videoUrl: 'https://www.youtube.com/watch?v=Z9e7K6Hx_rY'
+                },
+                { 
+                    title: 'Loving Is Easy', 
+                    image: 'assets/loving-vid.png',
+                    videoUrl: 'https://www.youtube.com/watch?v=39IU7ADaXmQ'
+                },
+                { 
+                    title: 'Amazing', 
+                    image: 'assets/amazing-vid.png',
+                    videoUrl: 'https://www.youtube.com/watch?v=nr2CsEtXxmI'
+                }
+            ];
+
+            let currentVideoIndex = 0;
+
+            function updateVideoDisplay() {
+                const currentVideo = videosData[currentVideoIndex];
+                
+                // Update image and title
+                $('#current-video-image').attr('src', currentVideo.image);
+                $('#current-video-title').text(currentVideo.title);
+
+                // Update navigation button states
+                $('#prev-video').prop('disabled', currentVideoIndex === 0);
+                $('#next-video').prop('disabled', currentVideoIndex === videosData.length - 1);
+            }
+
+            // Next Video Button
+            $('#next-video').click(function() {
+                if (currentVideoIndex < videosData.length - 1) {
+                    currentVideoIndex++;
+                    updateVideoDisplay();
+                }
+            });
+
+            // Previous Video Button
+            $('#prev-video').click(function() {
+                if (currentVideoIndex > 0) {
+                    currentVideoIndex--;
+                    updateVideoDisplay();
+                }
+            });
+
+            // Videos Link Modal Trigger
+            $('#videos-link').click(function(e) {
+                e.preventDefault();
+                
+                // Reset to first video when opening modal
+                currentVideoIndex = 0;
+                updateVideoDisplay();
+                
+                $('#videos-modal').modal('open');
+            });
+
+            // Initialize first video display
+            updateVideoDisplay();
+
+            //About modal popup
+            $('#about-link').click(function(e) {
+                e.preventDefault();
+                $('#about-modal').modal('open');
+            });
+
+            // Accordion Toggle
+            $('.accordion-header').click(function() {
+                // Close all other open accordions
+                $('.accordion-header').not(this).removeClass('active');
+                $('.accordion-content').not($(this).next()).css('max-height', '0');
+
+                // Toggle current accordion
+                $(this).toggleClass('active');
+                
+                const content = $(this).next('.accordion-content');
+                if (content.css('max-height') === '0px') {
+                    content.css('max-height', content.prop('scrollHeight') + 'px');
+                } else {
+                    content.css('max-height', '0');
+                }
+            });
+
+            $('.buy-button').click(function() {
+                const productTitle = $(this).siblings('.product-title').text();
+                alert(`Added ${productTitle} to cart!`);
+            });
+
+            $('.sticky-header nav a').hover(
+                function() {
+                    // Mouse enter
+                    $(this).find('.nav-underline').stop().animate({
+                        width: '100%'
+                    }, {
+                        duration: 300,
+                        easing: 'swing'
+                    });
+                },
+                function() {
+                    // Mouse leave
+                    $(this).find('.nav-underline').stop().animate({
+                        width: '0'
+                    }, {
+                        duration: 300,
+                        easing: 'swing'
+                    });
+                }
+            );
+        });
+    </script>
+</body>
+</html>
